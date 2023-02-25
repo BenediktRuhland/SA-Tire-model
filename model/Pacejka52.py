@@ -2,7 +2,9 @@
 import numpy as np
 
 #Parameter importieren
-import Parameter.Pacejka_Params_Indy as pa
+import sys
+sys.path.append('../parameter')
+import Pacejka_Params_Indy as pa
 
 #i increase for accuracy 
 i=1000
