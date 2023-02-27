@@ -4,6 +4,7 @@
 
 import numpy as np
 
+import parameter.Pacejka_Params_Indy as pa
 #----------------------------------------------------------------
 #lonitudinal Fx
 #https://skill-lync.com/student-projects/Longitudinal-brush-tire-model-50471
@@ -18,6 +19,8 @@ import numpy as np
 
 def brush_long(Sx,Fz,mu,lt,kt,lam):
 
+    #contact patch length
+    lt = np.sqrt((UNLOADED_RADIUS**2) - (pa.TYRE_RADIUS_MOD))
     Sx = Sx * 10 #scaling factor
     #critical slip
     Sx_crit = mu * Fz / (kt * lt * (lt + lam))
