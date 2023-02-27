@@ -2,9 +2,8 @@
 import numpy as np
 
 #Parameter importieren
-import sys
-sys.path.append('../parameter')
-import Pacejka_Params_Indy as pa
+
+import parameter.Pacejka_Params_Indy as pa
 
 #i increase for accuracy 
 i=1000
@@ -199,18 +198,32 @@ def Pacejka52_alinging_comb(Fz,Fz0,alpha,SL,Fx,Fy):
 
 #Fx
 
-def Pacejka5_long(SL):
+def Pacejka5_long(SL,Fz):
 
-    Fx= pa.PacLong_D * np.sin(pa.PacLong_C * np.arctan(pa.PacLong_D * SL - pa.PacLong_E * (pa.PacLong_B*SL - np.arctan(pa.PacLong_B * SL)))) 
+    Fx= Fz * pa.PacLong_D * np.sin(pa.PacLong_C * np.arctan(pa.PacLong_B * SL - pa.PacLong_E * (pa.PacLong_B*SL - np.arctan(pa.PacLong_B * SL)))) 
+    
+    return Fx
+
+def Pacejka5_long_pa(SL,Fz,B,C,D,E):
+
+    Fx= Fz * D * np.sin(C * np.arctan(B * SL -E * (B*SL - np.arctan(B * SL)))) 
     
     return Fx
     
 #Fy
-def Pacejka5_lat(alpha):
+def Pacejka5_lat(alpha,Fz):
 
-    Fy= pa.PacLat_D * np.sin(pa.PacLat_C * np.arctan(pa.PacLat_D * alpha - pa.PacLat_E * (pa.PacLat_B*alpha - np.arctan(pa.PacLat_B * alpha)))) 
+    Fy= Fz * pa.PacLat_D * np.sin(pa.PacLat_C * np.arctan(pa.PacLat_B * alpha - pa.PacLat_E * (pa.PacLat_B*alpha - np.arctan(pa.PacLat_B * alpha)))) 
     
     return Fy
+    
+def Pacejka5_lat_pa(alpha,Fz,B,C,D,E):
+
+    Fy= Fz *D * np.sin(C * np.arctan(B * alpha - E * (B*alpha - np.arctan(B * alpha)))) 
+    
+    return Fy
+    
+    
     
   
     
