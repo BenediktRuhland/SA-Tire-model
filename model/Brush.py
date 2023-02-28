@@ -60,7 +60,7 @@ def brush_long(Sx,Fz,mu,kt,lam):
 
 # Sy in degrees
 
-def Brush_lat(Sy, Fz, mu, Ca):
+def brush_lat(Sy, Fz, mu, Ca):
 
     #critical slip
     Sy_crit = mu * Fz / (2*Ca)
