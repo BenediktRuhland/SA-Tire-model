@@ -17,10 +17,11 @@ import parameter.Pacejka_Params_Indy as pa
 # kt = tire tangential stiffness [N/m^2]
 # lam = intial deformation
 
-def brush_long(Sx,Fz,mu,lt,kt,lam):
+def brush_long(Sx,Fz,mu,kt,lam):
 
     #contact patch length
-    lt = np.sqrt((UNLOADED_RADIUS**2) - (pa.TYRE_RADIUS_MOD))
+    lt = np.sqrt((pa.UNLOADED_RADIUS**2) - (pa.TYRE_RADIUS_MOD**2))
+
     Sx = Sx * 10 #scaling factor
     #critical slip
     Sx_crit = mu * Fz / (kt * lt * (lt + lam))
@@ -45,7 +46,7 @@ def brush_long(Sx,Fz,mu,lt,kt,lam):
             else:
                 lc[i] =  mu * Fz / (lt * kt * abs(Sx[i])) - lam
                 Fx[i] = - (kt * abs(Sx[i]) * (lc[i]) * (lam + lc[i] / 2) + mu * Fz * (1 - lc[i] / lt))
-    return Fx, lc
+    return Fx
 
 #----------------------------------------------------------------
 #lateral Fy
@@ -59,7 +60,7 @@ def brush_long(Sx,Fz,mu,lt,kt,lam):
 
 # Sy in degrees
 
-def Brush_lat(Sy, Fz, mu, Ca, lt):
+def Brush_lat(Sy, Fz, mu, Ca):
 
     #critical slip
     Sy_crit = mu * Fz / (2*Ca)
