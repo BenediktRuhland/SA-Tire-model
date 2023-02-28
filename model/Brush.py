@@ -37,8 +37,11 @@ def brush_long(Sx,Fz,mu,kt,lam):
                 Fx[i] = kt * lt * (lam + lt / 2) * Sx[i]
                 lc[i] = lt
             else:
-                lc[i] = mu * Fz / (lt * kt * Sx[i]) - lam
-                Fx[i] = kt * Sx[i] * (lc[i]) * (lam + lc[i] / 2) + mu * Fz * (1 - lc[i] / lt)
+                if (lt * kt * Sx[i]) - lam == 0:
+                    lc[i] = 0
+                else:
+                    lc[i] = mu * Fz / (lt * kt * Sx[i]) - lam
+                    Fx[i] = kt * Sx[i] * (lc[i]) * (lam + lc[i] / 2) + mu * Fz * (1 - lc[i] / lt)
         else:
             if abs(Sx[i]) < Sx_crit:
                 Fx[i] = - kt * lt * (lam + lt / 2) * abs(Sx[i])
