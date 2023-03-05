@@ -6,21 +6,20 @@
 #TMeasy
 
 #Fx: 
-DFX_long = 2.36956924e+05
-FMX_long = -8.31234170e+03
-FSX_long = -3.00584579e+03
-SMX_long = -4.20761657e-02
-SSX_long = -6.55582132e-01
-SMY_long = -1.44859540e+04
+DFX_long = 2.48428391e+05
+FMX_long = 7.45113790e+03
+FSX_long = 5.28849020e+03
+SMX_long = 6.06693945e-02
+SSX_long = 2.61320192e-01
+SMY_long = 9.09203532e-01
 
 #Fy: 
-DFY_lat = 1.23377206e+05
-FMY_lat = 8.58917745e+03
-FSY_lat = 8.03274447e+03
-SMY_lat = 1.30480776e-01
-SSY_lat = -6.02817710e-01
-SMX_lat = 1.41762125e+03
-
+DFY_lat = 1.17442284e+05
+FMY_lat = 6.96692988e+03
+FSY_lat = 6.19030406e+03
+SMY_lat = 1.40228962e-01
+SSY_lat = 3.33896904e-01
+SMX_lat = 3.52710315e+00
 
 #MFsimple
 
