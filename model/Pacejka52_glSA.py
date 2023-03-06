@@ -14,11 +14,9 @@ IA=0.1
 #Fz0= PacLat_Fznom #nominal load (z.b 80% von Fzmax)
 
 #Fx longitudenal
-def Pacejka52_long(SL,PHX1, PHX2, PKX1, PKX2, PKX3, PCX1, PDX1, PDX2, PDX3, PEX1, PEX2, PEX4, PVX1, PVX2): 
+def Pacejka52_long(SL,Fz,Fz0,PHX1, PHX2, PKX1, PKX2, PKX3, PCX1, PDX1, PDX2, PDX3, PEX1, PEX2, PEX4, PVX1, PVX2, LMUX, LEX): 
     #IA=inclination angle,  Fz0= highest load in data, 
     IA = 0
-    Fz0 = 3114
-    Fz = 8000
     #converts to rad
     gamma = IA*np.pi/180
     
@@ -28,10 +26,10 @@ def Pacejka52_long(SL,PHX1, PHX2, PKX1, PKX2, PKX3, PCX1, PDX1, PDX2, PDX3, PEX1
     kappax = kappa + SHx
     Ksr = Fz * ( PKX1+  PKX2 * dfz) * np.exp( PKX3 * dfz)   
     C =  PCX1 
-    mu = ( PDX1 +  PDX2 * dfz) * (1 -  PDX3 * gamma**2)#gamma=slip ratio
+    mu = ( PDX1 +  PDX2 * dfz) * (1 -  PDX3 * gamma**2) * LMUX#gamma=slip ratio
     D = mu*Fz
     B = Ksr / (C * D + 0.001)  #e=0.001
-    E = ( PEX1 +  PEX2 * dfz ) * (1 - ( PEX4 * np.sign(kappax))) #+ params[6] ** dfz therm fehlt
+    E = ( PEX1 +  PEX2 * dfz ) * (1 - ( PEX4 * np.sign(kappax))) * LEX #+ params[6] ** dfz therm fehlt
     Sv = Fz * ( PVX1 +  PVX2 * dfz) 
    
     
@@ -41,11 +39,10 @@ def Pacejka52_long(SL,PHX1, PHX2, PKX1, PKX2, PKX3, PCX1, PDX1, PDX2, PDX3, PEX1
 
 
 #Fy Lateral      
-def Pacejka52_lat(alpha,PVY1, PVY2, PVY3, PVY4, PKY1, PKY2, PKY3, PKY4, PKY5, PKY6, PKY7, PHY1, PHY2, PCY1, PDY1, PDY2, PDY3, PEY1, PEY2, PEY3, PEY4, PEY5): 
+def Pacejka52_lat(alpha,Fz,Fz0,PVY1, PVY2, PVY3, PVY4, PKY1, PKY2, PKY3, PKY4, PKY5, PKY6, PKY7, PHY1, PHY2, PCY1, PDY1, PDY2, PDY3, PEY1, PEY2, PEY3, PEY4, PEY5, LMUY, LEY): 
     #IA=inclination angle,  Fz0 = highest load in data, 
     IA = 0
-    Fz0 = 7000
-    Fz = 8000
+
     #converts to rad
     gamma = IA*np.pi/180
     
@@ -59,7 +56,7 @@ def Pacejka52_lat(alpha,PVY1, PVY2, PVY3, PVY4, PKY1, PKY2, PKY3, PKY4, PKY5, PK
     alphay = alpha + Shy
     
     C =  PCY1
-    mu = ( PDY1 +  PDY2 * dfz) / (1 +  PDY3 * gamma**2)
+    mu = ( PDY1 +  PDY2 * dfz) / (1 +  PDY3 * gamma**2) *LMUY
     D = mu*Fz
     B = Kya / (C * D + 0.001)  #e=0.001
 
@@ -68,7 +65,7 @@ def Pacejka52_lat(alpha,PVY1, PVY2, PVY3, PVY4, PKY1, PKY2, PKY3, PKY4, PKY5, PK
     j=0
     Fy = np.zeros(len(alphay))
     for j in range(0,len(alphay)):
-        E = ( PEY1 +  PEY2 * dfz ) * (1 +  PEY5*gamma**2 - ( PEY3 +  PEY4 * gamma) * np.sign(alphay[j]))
+        E = ( PEY1 +  PEY2 * dfz ) * (1 +  PEY5*gamma**2 - ( PEY3 +  PEY4 * gamma) * np.sign(alphay[j])) * LEY
     
         Fy[j] = - D * np.sin(C * np.arctan(B * alphay[j] - E * (B*alphay[j] - np.arctan(B * alphay[j])))) + Svy
     

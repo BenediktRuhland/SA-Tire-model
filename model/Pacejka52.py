@@ -25,12 +25,12 @@ def Pacejka52_long(Fz,SL,IA,Fz0):
     kappa = SL #- Reifengeschw/ Fahrzeuggeschw
     SHx = pa.PHX1 + pa.PHX2 * dfz
     kappax = kappa + SHx
-    Ksr = Fz * (pa.PKX1+ pa.PKX2 * dfz) * np.exp(pa.PKX3 * dfz)   
+    Ksr = Fz * (pa.PKX1+ pa.PKX2 * dfz) * np.exp(pa.PKX3 * dfz) * pa.LKX
     C = pa.PCX1 
-    mu = (pa.PDX1 + pa.PDX2 * dfz) * (1 - pa.PDX3 * gamma**2)#gamma=slip ratio
+    mu = (pa.PDX1 + pa.PDX2 * dfz) * (1 - pa.PDX3 * gamma**2) * pa.LMUX #gamma=slip ratio
     D = mu*Fz
     B = Ksr / (C * D + 0.001)  #e=0.001
-    E = (pa.PEX1 + pa.PEX2 * dfz ) * (1 - (pa.PEX4 * np.sign(kappax))) #+ params[6] ** dfz therm fehlt
+    E = (pa.PEX1 + pa.PEX2 * dfz ) * (1 - (pa.PEX4 * np.sign(kappax))) * pa.LEX #+ params[6] ** dfz therm fehlt
     Sv = Fz * (pa.PVX1 + pa.PVX2 * dfz) 
    
     
@@ -56,7 +56,7 @@ def Pacejka52_lat(Fz,alpha,IA,Fz0):
     alphay = alpha + Shy
     
     C = pa.PCY1
-    mu = (pa.PDY1 + pa.PDY2 * dfz) / (1 + pa.PDY3 * gamma**2)
+    mu = (pa.PDY1 + pa.PDY2 * dfz) / (1 + pa.PDY3 * gamma**2) * pa.LMUY
     D = mu*Fz
     B = Kya / (C * D + 0.001)  #e=0.001
 
@@ -65,7 +65,7 @@ def Pacejka52_lat(Fz,alpha,IA,Fz0):
     j=0
     Fy = np.zeros(len(alphay))
     for j in range(0,len(alphay)):
-        E = (pa.PEY1 + pa.PEY2 * dfz ) * (1 + pa.PEY5*gamma**2 - (pa.PEY3 + pa.PEY3 * gamma) * np.sign(alphay[j]))
+        E = (pa.PEY1 + pa.PEY2 * dfz ) * (1 + pa.PEY5*gamma**2 - (pa.PEY3 + pa.PEY3 * gamma) * np.sign(alphay[j])) * py.LEY
     
         Fy[j] = - D * np.sin(C * np.arctan(B * alphay[j] - E * (B*alphay[j] - np.arctan(B * alphay[j])))) + Svy
     
