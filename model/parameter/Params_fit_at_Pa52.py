@@ -39,13 +39,13 @@ E_lat = -0.80265574
 #Brush
 
 #Fx
-mu_long  = 1.62344260e+00
-kt_long  = 3.63683914e+06
-lam_long = 3.10083340e-02
+mu_b_long  = 1.62344260e+00
+kt_b_long  = 3.63683914e+06
+lam_b_long = 3.10083340e-02
 
 #Fy
-mu_lat = 1.96838261e+00
-Ca_lat = 9.71111628e+04
+mu_b_lat = 1.96838261e+00
+Ca_b_lat = 9.71111628e+04
 
 
 #Dugoff
