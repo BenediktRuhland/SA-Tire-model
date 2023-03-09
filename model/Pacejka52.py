@@ -65,7 +65,7 @@ def Pacejka52_lat(Fz,alpha,IA,Fz0):
     j=0
     Fy = np.zeros(len(alphay))
     for j in range(0,len(alphay)):
-        E = (pa.PEY1 + pa.PEY2 * dfz ) * (1 + pa.PEY5*gamma**2 - (pa.PEY3 + pa.PEY3 * gamma) * np.sign(alphay[j])) * py.LEY
+        E = (pa.PEY1 + pa.PEY2 * dfz ) * (1 + pa.PEY5*gamma**2 - (pa.PEY3 + pa.PEY3 * gamma) * np.sign(alphay[j])) * pa.LEY
     
         Fy[j] = - D * np.sin(C * np.arctan(B * alphay[j] - E * (B*alphay[j] - np.arctan(B * alphay[j])))) + Svy
     
