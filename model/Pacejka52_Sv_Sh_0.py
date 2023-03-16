@@ -23,20 +23,21 @@ def Pacejka52_long(Fz,SL,IA,Fz0):
     
     dfz = ((Fz-Fz0)/Fz0)  
     kappa = SL #- Reifengeschw/ Fahrzeuggeschw
-    SHx = pa.PHX1 + pa.PHX2 * dfz
+    SHx = 0#  pa.PHX1 + pa.PHX2 * dfz
     kappax = kappa + SHx
     Ksr = Fz * (pa.PKX1+ pa.PKX2 * dfz) * np.exp(pa.PKX3 * dfz)   
     C = pa.PCX1 
     mu = (pa.PDX1 + pa.PDX2 * dfz) * (1 - pa.PDX3 * gamma**2)#gamma=slip ratio
     D = mu*Fz
     B = Ksr / (C * D + 0.001)  #e=0.001
-    E = (pa.PEX1 + pa.PEX2 * dfz ) * (1 - (pa.PEX4 * np.sign(kappax))) #+ params[6] ** dfz therm fehlt
-    Sv = Fz * (pa.PVX1 + pa.PVX2 * dfz) 
-   
+    Sv = 0 #Fz * (pa.PVX1 + pa.PVX2 * dfz) 
+    Fx = np.zeros(len(kappax))
+    for i in range(0, len(kappax)):
+        E = (pa.PEX1 + pa.PEX2 * dfz ) * (1 - (pa.PEX4 * np.sign(kappax[i]))) #+ params[6] ** dfz therm fehlt
     
-    FX= D * np.sin(C * np.arctan(B * kappax - E * (B*kappax - np.arctan(B * kappax)))) 
+        Fx[i]= D * np.sin(C * np.arctan(B * kappax[i] - E * (B*kappax[i] - np.arctan(B * kappax[i])))) + Sv
     
-    return FX,D,B,C,Ksr,E
+    return Fx,D,B,C,Ksr,E
 
 
 #Fy Lateral      

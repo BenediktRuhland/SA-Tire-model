@@ -29,13 +29,14 @@ def Pacejka52_long(SL,Fz,Fz0,PHX1, PHX2, PKX1, PKX2, PKX3, PCX1, PDX1, PDX2, PDX
     mu = ( PDX1 +  PDX2 * dfz) * (1 -  PDX3 * gamma**2) * LMUX#gamma=slip ratio
     D = mu*Fz
     B = Ksr / (C * D + 0.001)  #e=0.001
-    E = ( PEX1 +  PEX2 * dfz ) * (1 - ( PEX4 * np.sign(kappax))) * LEX #+ params[6] ** dfz therm fehlt
-    Sv = Fz * ( PVX1 +  PVX2 * dfz) 
-   
+    Sv =   Fz * (pa.PVX1 + pa.PVX2 * dfz) 
+    Fx = np.zeros(len(kappax))
+    for i in range(0, len(kappax)):
+        E = (pa.PEX1 + pa.PEX2 * dfz ) * (1 - (pa.PEX4 * np.sign(kappax[i]))) #+ params[6] ** dfz therm fehlt
     
-    FX= D * np.sin(C * np.arctan(B * kappax - E * (B*kappax - np.arctan(B * kappax)))) 
+        Fx[i]= D * np.sin(C * np.arctan(B * kappax[i] - E * (B*kappax[i] - np.arctan(B * kappax[i])))) + Sv
     
-    return FX,D,B,C,Ksr,E
+    return Fx,D,B,C,Ksr,E
 
 
 #Fy Lateral      
