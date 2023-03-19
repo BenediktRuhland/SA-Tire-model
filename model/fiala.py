@@ -7,26 +7,39 @@ import numpy as np
 
 #longtudinal Fx
 
-def fiala_long(Sx,Sy,Fz,C_long,mu1,mu2):
+def fiala_long(Sx,Fz,C_long,mu1,mu2):
 
-    Fx = np.zeros(len(Sx))
-    for i in range(len(Sx)):
+    #Fx = np.zeros(len(Sx))
+    #for i in range(len(Sx)):
 
-        beta = np.sqrt(Sx[i]**2 + np.tan(Sy[i])**2)
-        if (mu2 - beta * (mu2 - mu1)) > 0:
-            mu = (mu2 - beta * (mu2 - mu1))
-        else:
-            mu = 0
+    #    beta = np.sqrt(Sx[i]**2 + np.tan(Sy[i])**2)
+    #    if (mu2 - beta * (mu2 - mu1)) > 0:
+    #        mu = (mu2 - beta * (mu2 - mu1))
+    #    else:
+    #        mu = 0
 
-        Sx_crit = 0.5 * abs((mu * Fz) / C_long)
+    #    Sx_crit = 0.5 * abs((mu * Fz) / C_long)
 
-        if abs(Sx[i]) < Sx_crit:
-            Fx[i] = C_long * Sx[i]
-        else:
-            Fx[i] = (mu * Fz - (mu * Fz / 2)**2) / C_long * (Sx[i])**2
+    #    if abs(Sx[i]) < Sx_crit:
+    #        Fx[i] = C_long * Sx[i]
+    #    else:
+    #        Fx[i] = (mu * Fz - (mu * Fz / 2)**2) / C_long * (Sx[i])**2
     
-    return Fx
+    #return Fx
+    Sy_crit = np.arctan(3 * mu1 * Fz / C_long)
+    
+    a1 = -C_long
+    a2 = ((C_long**2) / (3 * mu1 * Fz)) * (2 - (mu2/mu1))
+    a3 = -((C_long**3) / (9 * mu1**2 * Fz **2)) * (1- ((2 * mu2) / (3 * mu1)))
 
+    Fy = np.zeros(len(Sx))
+
+    for i in range(0, len(Sx)):
+        if abs(Sx[i]) < Sy_crit:
+            Fy[i] = a1 * np.tan(Sx[i]) + a2 * abs(np.tan(Sx[i])) * np.tan(Sx[i]) + a3 * np.tan(Sx[i])**3
+        else:
+            Fy[i] = -mu2 * Fz * np.sign(Sx[i]) 
+    return Fy , Sy_crit
 
 #lateral Fy
 

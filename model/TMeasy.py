@@ -1,7 +1,7 @@
 #######################################
 #TMeasy Tire Model
 #Prof.Rill Vehical Dynamics (Vorlesungsaufzeichnungen) Kapitel 3.
-#TUfast TMeasy Tire Model für Lapsim von Paco
+#TUfast TMeasy Tire Model für Lapsim 
 ########################################
 
 import numpy as np
