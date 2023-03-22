@@ -7,26 +7,41 @@ import numpy as np
 
 #longtudinal Fx
 
-def fiala_long(Sx,Sy,Fz,C_long,mu1,mu2):
+def fiala_long(Sx,Fz,C_long,mu1,mu2):
 
     #Matlab dokumentation https://de.mathworks.com/help/vdynblks/ref/fialawheel2dof.html
     
     #mu1 = Coefficient of static friction
     #mu2 = Coefficient of kinetic friction
-    Fx = np.zeros(len(Sx))
-    Sx_crit = abs((mu1 * Fz) / 2 * C_long)
-    for i in range(len(Sx)):
-        #kappa = np.sqrt(Sx[i]**2 + np.tan(Sy[i]**2))
-        lam = 1 #scaling factor frictiom
-        mu = mu1 #(mu1 - ( mu1 - mu2) * kappa) * lam 
+    #Fx = np.zeros(len(Sx))
+    
+    #for i in range(len(Sx)):
+    #    kappa = np.sqrt(Sx[i]**2 + np.tan(Sy[i]**2))
+    #    lam = 1 #scaling factor frictiom
+    #    mu = (mu1 - ( mu1 - mu2) * kappa) * lam 
+    #    Sx_crit = abs((mu1 * Fz) / (2 * C_long))
+        
+    #    if abs(Sx[i]) < Sx_crit:
+    #        Fx[i] = C_long * Sx[i]
+    #    else:
+    #        Fx[i] = np.tanh(4 * Sx[i]) * (mu * Fz - abs((mu * Fz)**2 / (4 * Sx[i] *C_long)))
+        
+    #return Fx ,Sx_crit
 
-        
-        if abs(Sx[i]) <= Sx_crit:
-            Fx[i] = C_long * Sx[i]
+    Sy_crit = np.arctan(3 * mu1 * Fz / C_long)
+    
+    a1 = -C_long
+    a2 = ((C_long**2) / (3 * mu1 * Fz)) * (2 - (mu2/mu1))
+    a3 = -((C_long**3) / (9 * mu1**2 * Fz **2)) * (1- ((2 * mu2) / (3 * mu1)))
+
+    Fy = np.zeros(len(Sx))
+
+    for i in range(0, len(Sx)):
+        if abs(Sx[i]) < Sy_crit:
+            Fy[i] = a1 * np.tan(Sx[i]) + a2 * abs(np.tan(Sx[i])) * np.tan(Sx[i]) + a3 * np.tan(Sx[i])**3
         else:
-            Fx[i] = np.tanh(4 * Sx[i]) * (mu * Fz - abs((mu * Fz)**2 / (4 * Sx[i] *C_long)))
-        
-    return Fx ,Sx_crit
+            Fy[i] = -mu2 * Fz * np.sign(Sx[i]) 
+    return Fy
 
 def fiala_lat(Sy,Fz,C_lat,mu1,mu2):
 

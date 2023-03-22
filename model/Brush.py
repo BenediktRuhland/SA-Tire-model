@@ -63,22 +63,54 @@ def brush_long(Sx,Fz,mu,kt,lam):
 
 # Sy in degrees
 
-def brush_lat(Sy, Fz, mu, Ca):
+def brush_lat(Sy, Fz, mu, kt, lam):
 
     #critical slip
-    Sy_crit = mu * Fz / (2*Ca)
+    #Sy_crit = mu * Fz / (2*Ca)
 
-    Fy = np.zeros(len(Sy))
-    for i in range(0, len(Sy)):
+    #Fy = np.zeros(len(Sy))
+    #for i in range(0, len(Sy)):
 
+    #    if Sy[i] >= 0:
+    #        if Sy[i] < Sy_crit:
+    #            Fy[i] = Ca * Sy[i]
+    #        else:
+    #            Fy[i] = mu * Fz - (mu * Fz)**2 / (4 * Ca * np.tan(Sy[i]))
+    #    else:
+    #        if abs(Sy[i]) < Sy_crit:
+    #            Fy[i] = - Ca * abs(Sy[i])
+    #        else:
+    #            Fy[i] = - (mu * Fz - (mu * Fz)**2 / (4 * Ca * np.tan(abs(Sy[i]))))
+    #return Fy
+
+    #contact patch length
+    lt = np.sqrt((pa.UNLOADED_RADIUS**2) - (pa.TYRE_RADIUS_MOD**2))
+ 
+    Sy = Sy * 10 #scaling factor
+    #critical slip
+    Sx_crit = mu * Fz / (kt * lt * (lt + lam))
+
+    Fx = np.zeros(len(Sy))
+    lc = np.zeros(len(Sy)) 
+
+    
+    for i in range(0,len(Sy)):
+        
         if Sy[i] >= 0:
-            if Sy[i] < Sy_crit:
-                Fy[i] = Ca * Sy[i]
+            if Sy[i] < Sx_crit:
+                Fx[i] = kt * lt * (lam + lt / 2) * Sy[i]
+                lc[i] = lt
             else:
-                Fy[i] = mu * Fz - (mu * Fz)**2 / (4 * Ca * np.tan(Sy[i]))
+                if (lt * kt * Sy[i]) - lam == 0:
+                    lc[i] = 0
+                else:
+                    lc[i] = mu * Fz / (lt * kt * Sy[i]) - lam
+                    Fx[i] = kt * Sy[i] * (lc[i]) * (lam + lc[i] / 2) + mu * Fz * (1 - lc[i] / lt)
         else:
-            if abs(Sy[i]) < Sy_crit:
-                Fy[i] = - Ca * abs(Sy[i])
+            if abs(Sy[i]) < Sx_crit:
+                Fx[i] = - kt * lt * (lam + lt / 2) * abs(Sy[i])
+                lc[i] = lt
             else:
-                Fy[i] = - (mu * Fz - (mu * Fz)**2 / (4 * Ca * np.tan(abs(Sy[i]))))
-    return Fy
+                lc[i] =  mu * Fz / (lt * kt * abs(Sy[i])) - lam
+                Fx[i] = - (kt * abs(Sy[i]) * (lc[i]) * (lam + lc[i] / 2) + mu * Fz * (1 - lc[i] / lt))
+    return Fx
