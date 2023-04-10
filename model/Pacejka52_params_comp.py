@@ -18,12 +18,12 @@ IA=0.1
 def Pacejka52_long(Fz,SL,IA,Fz0,params): 
     #IA=inclination angle,  Fz0= highest load in data, 
     
-    if params == 'Indy':
+    if params == 'INDY':
         import parameter.Pacejka_Params_Indy as pa
-    elif params == 'pkw':
+    elif params == 'PKW':
         import parameter.Pacejka_Params_pkw as pa
     else:
-        print('choose Parameter Set (Indy or Pkw)')
+        print('choose Parameter Set (INDY or PKW)')
 
     #converts to rad
     gamma = IA*np.pi/180
@@ -51,12 +51,12 @@ def Pacejka52_long(Fz,SL,IA,Fz0,params):
 def Pacejka52_lat(Fz,alpha,IA,Fz0,params): 
     #IA=inclination angle,  Fz0 = highest load in data, 
     
-    if params == 'Indy':
+    if params == 'INDY':
         import parameter.Pacejka_Params_Indy as pa
-    elif params == 'pkw':
+    elif params == 'PKW':
         import parameter.Pacejka_Params_pkw as pa
     else:
-        print('choose Parameter Set (Indy or Pkw)')
+        print('choose Parameter Set (INDY or PKW)')
         
     #converts to rad
     gamma = IA*np.pi/180
