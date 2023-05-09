@@ -24,10 +24,10 @@ SMX_lat = 3.52710315e+00
 #MFsimple
 
 #Fx
-B_long =17.04378049
-C_long =1.99996234
-D_long =1.82504605
-E_long = 0.62177794
+B_long =19.7526835
+C_long =1.99999146
+D_long =1.63455163
+E_long = 0.75471735
 
 #Fy
 B_lat = -9.10763555
@@ -51,9 +51,9 @@ lam_b_lat = 5.74790914e-02
 #Dugoff
 
 #Fx
-Cs_long = 1.54528498e+05
-Ca_long = -1.96810483e+01
-mu_long = 1.25090001e+00
+Cs_long = 1.58443682e+05
+Ca_long = -1.59200977e+00
+mu_long = 1.24651131e+00
 
 #Fy
 Cs_lat = 1.94120979e-01
