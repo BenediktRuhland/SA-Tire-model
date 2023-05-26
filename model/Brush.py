@@ -114,3 +114,5 @@ def brush_lat(Sy, Fz, mu, kt, lam):
                 lc[i] =  mu * Fz / (lt * kt * abs(Sy[i])) - lam
                 Fx[i] = - (kt * abs(Sy[i]) * (lc[i]) * (lam + lc[i] / 2) + mu * Fz * (1 - lc[i] / lt))
     return Fx
+
+print(np.sqrt((pa.UNLOADED_RADIUS**2) - (pa.TYRE_RADIUS_MOD**2)))

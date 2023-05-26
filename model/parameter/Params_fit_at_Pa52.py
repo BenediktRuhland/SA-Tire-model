@@ -6,20 +6,20 @@
 #TMeasy
 
 #Fx: 
-DFX_long = 2.48428391e+05
-FMX_long = 7.45113790e+03
-FSX_long = 5.28849020e+03
-SMX_long = 6.06693945e-02
-SSX_long = 2.61320192e-01
-SMY_long = 9.09203532e-01
+DFX_long = 2.73698918e+05
+FMX_long = 6.49227443e+03
+FSX_long = 4.92427382e+03
+SMX_long = 5.65704982e-02
+SSX_long = 2.59229223e-01
+SMY_long = 5.03325089e+00
 
 #Fy: 
-DFY_lat = 1.17442284e+05
-FMY_lat = 6.96692988e+03
-FSY_lat = 6.19030406e+03
-SMY_lat = 1.40228962e-01
-SSY_lat = 3.33896904e-01
-SMX_lat = 3.52710315e+00
+DFY_lat = 9.01646321e+04
+FMY_lat = 6.39266085e+03
+FSY_lat = 5.30979506e+03
+SMY_lat = 1.15048404e-01
+SSY_lat = 3.01495645e-01
+SMX_lat = 3.54195854e+00
 
 #MFsimple
 
@@ -30,9 +30,9 @@ D_long =1.63455163
 E_long = 0.75471735
 
 #Fy
-B_lat = -9.10763555
-C_lat =1.5991035
-D_lat = -1.60244708 
+B_lat = 9.10763555
+C_lat = 1.5991035
+D_lat = 1.60244708 
 E_lat = -1.89562919
    
 
@@ -54,12 +54,13 @@ lam_b_lat = 5.74790914e-02
 Cs_long = 1.58443682e+05
 Ca_long = -1.59200977e+00
 mu_long = 1.24651131e+00
+#mit Syyy = np.linspace(0.001,0.2,1000)
 
 #Fy
-Cs_lat = 1.94120979e-01
-Ca_lat = 4.07519670e+03
-mu_lat =  1.42305583e-01
-
+Cs_lat = 2.74289218e-01
+Ca_lat = 6.16477615e+03
+mu_lat =  1.43548745e-01
+#mit Sxxx = np.linspace(0,0.1,1000)
 #Fiala
 
 #Fy
