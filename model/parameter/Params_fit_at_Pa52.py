@@ -14,13 +14,20 @@ SSX_long = 2.59229223e-01
 SMY_long = 5.03325089e+00
 
 #Fy: 
-DFY_lat = 9.01646321e+04
-FMY_lat = 6.39266085e+03
-FSY_lat = 5.30979506e+03
-SMY_lat = 1.15048404e-01
-SSY_lat = 3.01495645e-01
-SMX_lat = 3.54195854e+00
+#DFY_lat = 9.01646321e+04
+#FMY_lat = 6.39266085e+03
+#FSY_lat = 5.30979506e+03
+#SMY_lat = 1.15048404e-01
+#SSY_lat = 3.01495645e-01
+#SMX_lat = 3.54195854e+00
 
+#Fy neu:
+DFY_lat = 9.46557086e+04  
+FMY_lat = 6.40338330e+03  
+FSY_lat = 5.57015421e+03 
+SMY_lat = -8.82115882e-01
+SSY_lat = -7.30516695e-01  
+SMX_lat = 2.03471709e+00
 #MFsimple
 
 #Fx

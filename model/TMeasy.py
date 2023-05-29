@@ -7,12 +7,12 @@
 import numpy as np
 
 def calcFY(SX, SY, DFY, FMY, FSY, SMY, SSY,SMX):
-    DFY_arr = np.zeros(len(SX)) + DFY
-    FMY_arr = np.zeros(len(SX)) + FMY
-    FSY_arr = np.zeros(len(SX)) + FSY
-    SMY_arr = np.zeros(len(SX)) + SMY
-    SSY_arr = np.zeros(len(SX)) + SSY
-    SMX_arr = np.zeros(len(SX)) + SMX
+    DFY_arr = np.ones(len(SX)) + DFY
+    FMY_arr = np.ones(len(SX)) + FMY
+    FSY_arr = np.ones(len(SX)) + FSY
+    SMY_arr = np.ones(len(SX)) + SMY
+    SSY_arr = np.ones(len(SX)) + SSY
+    SMX_arr = np.ones(len(SX)) + SMX
 
     #Normalized slip
     SIGX = SX/SMX_arr
